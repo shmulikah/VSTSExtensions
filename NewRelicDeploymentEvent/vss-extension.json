@@ -25,6 +25,9 @@
     },
     {
       "path": "img/screenshots/endpoint2.png"
+    },
+	{
+      "path": "img/screenshots/task.png"
     }
 ],
  "content": {
@@ -34,22 +37,22 @@
   },
   "links": {
     "home": {
-      "uri": "https://github.com/jmezach/NewRelicDashboardWidgets"
+      "uri": "https://github.com/shmulikah/VSTSExtensions"
     },
     "getstarted": {
-      "uri": "https://github.com/jmezach/NewRelicDashboardWidgets"
+      "uri": "https://github.com/shmulikah/VSTSExtensions"
     },
     "learn": {
-      "uri": "https://github.com/jmezach/NewRelicDashboardWidgets"
+      "uri": "https://github.com/shmulikah/VSTSExtensions"
     },
     "support": {
-      "uri": "https://github.com/jmezach/NewRelicDashboardWidgets"
+      "uri": "https://github.com/shmulikah/VSTSExtensions"
     },
     "repository": {
-      "uri": "https://github.com/jmezach/NewRelicDashboardWidgets"
+      "uri": "https://github.com/shmulikah/VSTSExtensions"
     },
     "issues": {
-      "uri": "https://github.com/jmezach/NewRelicDashboardWidgets/issues"
+      "uri": "https://github.com/shmulikah/VSTSExtensions/issues"
     }
   },
 
