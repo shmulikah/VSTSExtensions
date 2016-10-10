@@ -13,16 +13,18 @@ return $ReleaseURL
 Function RecordDeployment($BaseURL, $appID, $apiKey)
 {
 
-  $BodyData = @{ "deployment"=
-  @{
-    revision= $Revision
-    changelog= $Changelog
-    description= $description
-    user= $user
-    }
+$URI="$BaseURL/applications/$appID/deployments.json"
+Write-Verbose "Sending the Deployment details to New Relic: $URI" -Verbose
+$r=Invoke-RestMethod -Uri $URI -Method POST -Headers @{'X-Api-Key'=$apiKey} -ContentType 'application/json' -TimeoutSec 300 -Body @"
+{
+    "deployment": {
+    "revision": "$revision",
+    "changelog": "$changelog",
+    "description": "$description",
+    "user": "$user"
 }
-Write-Verbose "Sending the Deployment details to new relic" -Verbose
-$r=Invoke-RestMethod -Uri $BaseURL/applications/$appID/deployments.json -Method POST -Headers @{'X-Api-Key'=$apiKey} -ContentType 'application/json' -Body $BodyData -TimeoutSec 300
+}
+"@ 
 
 if ( $r.StatusCode -eq 200)
 {
@@ -125,7 +127,7 @@ $appID= $r.applications.id | Select-Object -first 1
 Write-Verbose "AppID is $appID" -Verbose
 
 
-RecordDeployment $BaseURL $apiKey $appID
+RecordDeployment $BaseURL $appID $apiKey
 
 
 
