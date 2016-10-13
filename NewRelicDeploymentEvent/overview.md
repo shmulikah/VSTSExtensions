@@ -44,6 +44,7 @@ with your own value- if you choose to not use an application value from the pick
 ![](img/screenshots/task.png)
 
 Enter the required parameter values for the task:
+
 **application**- can be picked from an auto-populate picklist with all of your New Relic applications, according to your pre-defined New Relic endpoint.
 
 **revision**- if no value is specified, default value is BUILD_SOURCEVERSION
