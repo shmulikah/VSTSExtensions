@@ -3,7 +3,8 @@
 **New Relic**
 
 New Relic gives you deep performance analytics for every part of your software environment.
-You can easily view and analyze massive amounts of data, and gain actionable insights in real-time. For your apps. For your users. For your business.
+You can easily view and analyze massive amounts of data, and gain actionable insights in real-time. 
+For your apps. For your users. For your business.
 
 **Note:** The extension uses the V2 New Relic API.
 
@@ -19,6 +20,7 @@ You can easily view and analyze massive amounts of data, and gain actionable ins
 ## Usage
 This extensions contains a set of components for publish/record a new deployment event to your new relic account [New Relic](http://www.newrelic.com).
 This extension installs the following :
+
 
 * A new relic endpoint with Token based autetication scheme for connecting to your New Relic account.
 * A New relic task to:
@@ -44,6 +46,7 @@ This extension installs the following :
 ![](img/screenshots/task.png)
 
 Enter the required parameter values for the task:
+
 
 **application**- can be picked from an auto-populate a picklist with all of your New Relic applications, according to your pre-defined New Relic endpoint.
 
