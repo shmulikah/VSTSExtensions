@@ -22,10 +22,10 @@ This extensions contains a set of components for publish/record a new deployment
 This extension installs the following :
 
 
-* A new relic endpoint with Token based autetication scheme for connecting to your New Relic account.
+* A new relic endpoint with Token based authentication scheme for connecting to your New Relic account.
 * A New relic task to:
 	publish/record a deployment event of an app to your New Relic account.
-	It will add to the deployment event a valuebale data such as revision, changelog and description which will be reflected in the deployment event of
+	It will add to the deployment event a valuable data such as revision, changelog and description which will be reflected in the deployment event of
 	the specific application in your New Relic account.
 
 	What is great in this task is that it will auto-populate a picklist with all of your New Relic applications, according to your pre-defined New Relic secured endpoint.	
