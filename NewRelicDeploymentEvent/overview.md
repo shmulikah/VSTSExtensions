@@ -20,7 +20,7 @@ For your apps. For your users. For your business.
 
 
 ## Usage
-This extensions contains a set of components for publish/record a new deployment event to your [New Relic](http://www.newrelic.com) account.
+This extensions contains a set of components for publish/record a new deployment event to your new relic account [New Relic](http://www.newrelic.com).
 This extension installs the following :
 
 
