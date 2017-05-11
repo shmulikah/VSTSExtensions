@@ -12,8 +12,10 @@ For your apps. For your users. For your business.
  
 
 ## Release Notes
-* 1.0.3
-	* fixing issues with changelog user default value, See [GitHub issues](https://github.com/shmulikah/VSTSExtensions/issues)
+* 1.1.1
+	* Adding input validation to the required argument- 'revision'
+	* Adding logging 
+	* Fixing issue with changelog default value, See [GitHub issues](https://github.com/shmulikah/VSTSExtensions/issues)
 * 1.0.0
     * First release
 

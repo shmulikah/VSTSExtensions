@@ -3,7 +3,7 @@
 
 Function Get-ReleaseURL()
 {
-$ReleaseURL=$env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI + $env:SYSTEM_TEAMPROJECT + "/_apps/hub/ms.vss-releaseManagement-web.hub-explorer?definitionId="+ $env:RELEASE_DEFINITIONID +"&amp;releaseId=" + $env:RELEASE_RELEASEID  +"&amp;_a=release-summary"
+$ReleaseURL=$env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI + $env:SYSTEM_TEAMPROJECT + "/_apps/hub/ms.vss-releaseManagement-web.hub-explorer?definitionId="+ $env:RELEASE_DEFINITIONID +"&amp;releaseId=" + $env:RELEASE_RELEASEID  +"&amp;_a=release-summary" +"&releaseId=" + $env:RELEASE_RELEASEID  +"&_a=release-summary"
 return $ReleaseURL
 }
 
@@ -14,7 +14,7 @@ Function RecordDeployment($BaseURL, $appID, $apiKey)
 {
 
 $URI="$BaseURL/applications/$appID/deployments.json"
-Write-Verbose "Sending the Deployment details to New Relic: $URI" -Verbose
+write-host "Sending the Deployment details to New Relic: $URI" 
 $r=Invoke-RestMethod -Uri $URI -Method POST -Headers @{'X-Api-Key'=$apiKey} -ContentType 'application/json' -TimeoutSec 300 -Body @"
 {
     "deployment": {
@@ -28,8 +28,8 @@ $r=Invoke-RestMethod -Uri $URI -Method POST -Headers @{'X-Api-Key'=$apiKey} -Con
 
 if ( $r.StatusCode -eq 200)
 {
-    write-verbose "Deployment event of $AppName was recorded successfully to NewRelic server" -Verbose
-    write-verbose  $r -Verbose
+    write-host "Deployment event of $AppName was recorded successfully to NewRelic server" 
+    write-host  $r 
 }
 
  }
@@ -37,35 +37,35 @@ if ( $r.StatusCode -eq 200)
 
 # Output logo.
 Function PrintLogo {
- write-verbose "" -Verbose
- write-verbose "" -Verbose
- write-verbose "=================================================================================================" -Verbose
- write-verbose "New Relic record deployment task" -Verbose
- write-verbose "Written by Shmulik Ahituv. All rights reserved.`n" -Verbose
- write-verbose "=================================================================================================" -Verbose
- write-verbose "" -Verbose
- write-verbose "" -Verbose
+ write-host "" 
+ write-host "" 
+ write-host "=================================================================================================" 
+ write-host "New Relic record deployment task" 
+ write-host "Written by Shmulik Ahituv. All rights reserved.`n" 
+ write-host "=================================================================================================" 
+ write-host "" 
+ write-host "" 
 }
 
 # Output  parameters.
 Function PrintArguments {
-  write-verbose "=================================================================================================" -Verbose
-  write-verbose "Executing task with the following arguments:" -Verbose
-  write-verbose "=================================================================================================" -Verbose
-  write-verbose "*************** Application:          $application" -Verbose
-  write-verbose "*************** Revision:             $revision" -Verbose
-  write-verbose "*************** Changelog:            $changelog" -Verbose
-  write-verbose "*************** Description:          $description" -Verbose
-  write-verbose "#################################################################################################" -Verbose
-  write-verbose "Finish Printing task's arguments" -Verbose
-  write-verbose "#################################################################################################" -Verbose
+  write-host "=================================================================================================" 
+  write-host "Executing task with the following arguments:" 
+  write-host "=================================================================================================" 
+  write-host "*************** Application:          $application" 
+  write-host "*************** Revision:             $revision" 
+  write-host "*************** Changelog:            $changelog" 
+  write-host "*************** Description:          $description" 
+  write-host "#################################################################################################" 
+  write-host "Finish Printing task's arguments" 
+  write-host "#################################################################################################" 
 }
 
 
 
 
 #Main
-Write-Verbose "Importing module: VstsTaskSdk" -Verbose
+write-host "Importing module: VstsTaskSdk" 
 Import-Module $PSScriptRoot\ps_modules\VstsTaskSdk\VstsTaskSdk.psd1 -ArgumentList @{ NonInteractive = $true } -Verbose:$false
 
 PrintLogo
@@ -82,55 +82,58 @@ Exit 1
 $revision=Get-VstsInput -name revision
 if ([string]::IsNullOrEmpty($revision))
 {
-Write-Verbose "Revision is empty, using default" -Verbose
+write-host "Revision is empty, trying to use default" 
 $revision=$env:BUILD_SOURCEVERSION
+if ([string]::IsNullOrEmpty($revision))
+{
+Write-Error "deafult BUILD_SOURCEVERSION is empty, revision cannot be null or empty" 
+Exit 1
+}
 }
 
 $Changelog=Get-VstsInput -name Changelog
 if ([string]::IsNullOrEmpty($Changelog))
 {
-Write-Verbose "Changelog is empty, using default" -Verbose
+write-host "Changelog is empty, using default" 
 $changelog=Get-ReleaseURL
 }
 
 $description=Get-VstsInput -name description
 if ([string]::IsNullOrEmpty($description))
 {
-Write-Verbose "Description is empty, using default" -Verbose
+write-host "Description is empty, using default" 
 $description=$env:RELEASE_RELEASEDESCRIPTION
 }
 
 $user=Get-VstsInput -name user
 if ([string]::IsNullOrEmpty($user))
 {
-Write-Verbose "User is empty, using default" -Verbose
+write-host "User is empty, using default" 
 $user=$env:RELEASE_REQUESTEDFOR
 
- 
 }
 
 PrintArguments
 #Get Endpoint details
 $serviceNameInput= Get-VstsInput -name NewRelicService
-write-Verbose "Endpoint id: $serviceNameInput" -Verbose
+write-host "Endpoint id: $serviceNameInput" 
 $endpoint=Get-VstsEndpoint -name $serviceNameInput
-write-Verbose "Endpoint details: $endpoint" -Verbose
+write-host "Endpoint details: $endpoint" 
 
 
 #Get AppID
 $BaseURL=$endpoint.URL
 $url=$BaseURL+"/applications.json"
 $apiKey=$endpoint.Auth[0].parameters[0].apitoken
-Write-Verbose "Getting the App_id from the given application name" -Verbose
-Write-Verbose "URL is: $url, application is: $application, token is : $apiKey" -Verbose
+write-host "Getting the App_id from the given application name" 
+write-host "URL is: $url, application is: $application, token is : $apiKey" 
 
 $r=Invoke-RestMethod -Method Post -Uri $url -Body "filter[name]=$application" -Header @{"X-Api-Key"=$apiKey}
 $appID= $r.applications.id | Select-Object -first 1
-Write-Verbose "AppID is $appID" -Verbose
+write-host "AppID is $appID" 
 
 
 RecordDeployment $BaseURL $appID $apiKey
-
 
 
 

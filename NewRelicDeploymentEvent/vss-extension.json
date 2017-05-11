@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "new-relic-record-deployment",
-  "version": "1.0.3",
+  "version": "1.1.1",
   "name": "New Relic Record Deployment",
   "description": "New Build/Release task to record deployment event securely to your New Relic account with a dedicated new endpoint type",
   "publisher": "ShmulikAhituv",
