@@ -3,7 +3,7 @@
 
 Function Get-ReleaseURL()
 {
-$ReleaseURL=$env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI + $env:SYSTEM_TEAMPROJECT + "/_apps/hub/ms.vss-releaseManagement-web.hub-explorer?definitionId="+ $env:RELEASE_DEFINITIONID + "&amp;_a=release-summary&amp;releaseId=" + $env:RELEASE_RELEASEID + "&amp;_a=release-summary&amp;releaseId=" + $env:RELEASE_RELEASEID
+$ReleaseURL=$env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI + $env:SYSTEM_TEAMPROJECT + "/_apps/hub/ms.vss-releaseManagement-web.hub-explorer?definitionId="+ $env:RELEASE_DEFINITIONID +"&amp;releaseId=" + $env:RELEASE_RELEASEID  +"&amp;_a=release-summary"
 return $ReleaseURL
 }
 
@@ -105,6 +105,8 @@ if ([string]::IsNullOrEmpty($user))
 {
 Write-Verbose "User is empty, using default" -Verbose
 $user=$env:RELEASE_REQUESTEDFOR
+
+ 
 }
 
 PrintArguments

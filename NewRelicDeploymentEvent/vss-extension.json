@@ -1,13 +1,18 @@
 {
   "manifestVersion": 1,
   "id": "new-relic-record-deployment",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "name": "New Relic Record Deployment",
   "description": "New Build/Release task to record deployment event securely to your New Relic account with a dedicated new endpoint type",
   "publisher": "ShmulikAhituv",
     "icons": {
     "default": "img/logo.png"
 },
+
+    "galleryFlags": [
+        "Public"
+    ],
+   
 
   "targets": [
     {
